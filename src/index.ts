@@ -11,7 +11,8 @@ chrome.tabs.query({}, function(tabs: chrome.tabs.Tab[]) {
 
   function inputChangeHandler(event: InputEvent) {
     const { value } = event.target as HTMLInputElement
-    const filterdTabs = tabs.filter(tab => tab.title?.includes(value) || tab.url?.includes(value))
+    const filterdTabs =
+      tabs.filter(tab => tab.title?.toLowerCase().includes(value.toLowerCase()) || tab.url?.toLowerCase().includes(value.toLowerCase()))
     render(openTabsList(filterdTabs, submitHandler, inputChangeHandler), document.body)
   }
 })

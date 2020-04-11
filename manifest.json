@@ -3,7 +3,6 @@
   "name": "search-tabs",
   "description": "Search open tabs using vim keybindings",
   "version": "0.1",
-  "icons": [],
   "browser_action": {
     "default_title": "Search Open Tabs",
     "default_popup": "./src/index.html"

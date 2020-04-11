@@ -3,12 +3,6 @@ import { html } from 'lit-html'
 type SubmitHandler = (event: Event) => void
 type InputChangeHandler = (event: InputEvent) => void
 
-const searchField = (submitHandler: SubmitHandler, inputChangeHandler: InputChangeHandler) => html`
-  <form @submit=${submitHandler}>
-    <input type="search" placeholder="Type your search query" ?autofocus=${true} @input=${inputChangeHandler} />
-  </form>
-`
-
 const tabItem = (tab: chrome.tabs.Tab) => html`
   <li>
     <div>${tab.title}</div>
@@ -16,12 +10,19 @@ const tabItem = (tab: chrome.tabs.Tab) => html`
   </li>
 `
 
-export const openTabsList = (tabs: chrome.tabs.Tab[], submitHandler: SubmitHandler, inputChangeHandler: InputChangeHandler) => html`
-  <div>
-    ${searchField(submitHandler, inputChangeHandler)}
-    <ul>
-      ${tabs.map(tab => tabItem(tab))}
-    </ul>
-  </div>
-  
-`
+export function openTabsList(tabs: chrome.tabs.Tab[], submitHandler: SubmitHandler, inputChangeHandler: InputChangeHandler) {
+  const searchField = html`
+  <form @submit=${submitHandler}>
+    <input type="search" placeholder="Type your search query" ?autofocus=${true} @input=${inputChangeHandler} />
+  </form>
+  `
+
+  return html`
+    <div>
+      ${searchField}
+      <ul>
+        ${tabs.map(tab => tabItem(tab))}
+      </ul>
+    </div>
+  `
+}
