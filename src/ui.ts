@@ -2,6 +2,11 @@ import { html } from 'lit-html'
 
 type SubmitHandler = (event: Event) => void
 type InputChangeHandler = (event: InputEvent) => void
+type ListRendererParams = {
+  tabs: chrome.tabs.Tab[],
+  submitHandler: SubmitHandler,
+  inputChangeHandler: InputChangeHandler
+}
 
 const tabItem = (tab: chrome.tabs.Tab, isSelected: boolean) => html`
   <li class=${isSelected ? 'selected-tab' : ''}>
@@ -10,7 +15,11 @@ const tabItem = (tab: chrome.tabs.Tab, isSelected: boolean) => html`
   </li>
 `
 
-export function openTabsList(tabs: chrome.tabs.Tab[], submitHandler: SubmitHandler, inputChangeHandler: InputChangeHandler) {
+export function openTabsList({
+  tabs,
+  submitHandler,
+  inputChangeHandler
+}: ListRendererParams) {
   const searchField = html`
   <form @submit=${submitHandler}>
     <input type="search" placeholder="Type your search query" ?autofocus=${true} @input=${inputChangeHandler} />
