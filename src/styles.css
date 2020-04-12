@@ -1,3 +1,24 @@
 .selected-tab {
   background-color: darkgray;
 }
+
+input {
+  width: 100%;
+}
+
+body {
+  min-width: 500px;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  border-bottom: 1px solid black;
+  list-style-type: none;
+}
+
+li + li {
+  margin-top: 2px;
+}
