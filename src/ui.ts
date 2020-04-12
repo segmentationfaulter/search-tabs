@@ -3,8 +3,8 @@ import { html } from 'lit-html'
 type SubmitHandler = (event: Event) => void
 type InputChangeHandler = (event: InputEvent) => void
 
-const tabItem = (tab: chrome.tabs.Tab) => html`
-  <li>
+const tabItem = (tab: chrome.tabs.Tab, isSelected: boolean) => html`
+  <li class=${isSelected ? 'selected-tab' : ''}>
     <div>${tab.title}</div>
     <div>${tab.url}</div>
   </li>
@@ -21,7 +21,7 @@ export function openTabsList(tabs: chrome.tabs.Tab[], submitHandler: SubmitHandl
     <div>
       ${searchField}
       <ul>
-        ${tabs.map(tab => tabItem(tab))}
+        ${tabs.map((tab, index) => tabItem(tab, index === 0))}
       </ul>
     </div>
   `
